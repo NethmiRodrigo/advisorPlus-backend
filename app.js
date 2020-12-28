@@ -23,6 +23,8 @@ app.get("/", (req, res) => {
 //User routes
 const userRoutes = require("./routes/user.routes");
 userRoutes(app);
+const user_sqlRoutes = require("./routes/user_sql.routes");
+user_sqlRoutes(app);
 
 app.listen(port, () => {
   console.log(`Praise the lord! It's running on ${port}`);

@@ -1,5 +1,5 @@
 const firebase = require("firebase");
-const firebaseConfig = require("../util/config");
+const firebaseConfig = require("../config/config");
 
 //Utilities
 const { isEmail } = require("../util/validations");
