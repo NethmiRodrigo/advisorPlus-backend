@@ -1,0 +1,103 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "3.0.3",
+    "title": "Advisor Plus",
+    "description": "Advisor Plus API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/user_sql/{userId}": {
+      "get": {
+        "tags": ["User (SQL)"],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": "true",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "summary": "Get users details in SQL database",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/User (SQL)"
+            }
+          }
+        }
+      }
+    },
+    "/user_sql": {
+      "post": {
+        "tags": ["User (SQL)"],
+        "consumes": "application/json",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "schema": {
+              "$ref": "#/definitions/User (SQL)"
+            }
+          }
+        ],
+        "summary": "Create user in SQL database",
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": "text"
+          },
+          "404": {
+            "description": "ERROR",
+            "content": "text"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User (SQL)": {
+      "type": "object",
+      "required": [
+        "UID",
+        "FullName",
+        "Username",
+        "Qualifications",
+        "FieldOfInterest"
+      ],
+      "properties": {
+        "UID": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+
+        "FullName": {
+          "type": "string"
+        },
+        "Username": {
+          "type": "string"
+        },
+        "Qualifications": {
+          "type": "string"
+        },
+        "FieldOfInterest": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

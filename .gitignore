@@ -1,0 +1,37 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules
+/.pnp
+.pnp.js
+.eslintcache
+# testing
+/coverage
+
+#database
+/db_data
+/mysql-data
+/data
+/Database
+
+# production
+/build
+
+#firebase
+util/serviceAccount.json
+config/config.js
+util/admin.js
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.vscode
+util/config.js
+config/dev-hackathon-11f94-firebase-adminsdk-h7t6q-fb2a87211a.json

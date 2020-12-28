@@ -1,0 +1,29 @@
+const express = require("express");
+const swaggerUi = require("swagger-ui-express");
+const cors = require("cors");
+const morgan = require("morgan");
+const swaggerDocument = require("./swagger.json");
+
+const app = express();
+
+const port = "5000" || process.env.PORT;
+
+app.use(cors());
+app.use(express.json());
+
+/* Log HTTP requests */
+app.use(morgan("dev"));
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+app.get("/", (req, res) => {
+  res.status(200).send(`server is running at port ${port}`);
+});
+
+//User routes
+const userRoutes = require("./routes/user.routes");
+userRoutes(app);
+
+app.listen(port, () => {
+  console.log(`Praise the lord! It's running on ${port}`);
+});
