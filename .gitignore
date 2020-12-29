@@ -20,7 +20,6 @@ node_modules
 #firebase
 util/serviceAccount.json
 config/config.js
-util/admin.js
 
 # misc
 .DS_Store
@@ -35,3 +34,4 @@ yarn-error.log*
 .vscode
 util/config.js
 config/dev-hackathon-11f94-firebase-adminsdk-h7t6q-fb2a87211a.json
+config/fb_config.js

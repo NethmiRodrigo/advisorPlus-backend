@@ -14,8 +14,9 @@
     "firebase": "^8.2.1",
     "firebase-admin": "^9.4.2",
     "morgan": "^1.10.0",
-    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
     "nodemon": "^2.0.6",
+    "sequelize": "^6.3.5",
     "swagger-ui-express": "^4.1.6"
   }
 }
