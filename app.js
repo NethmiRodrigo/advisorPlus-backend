@@ -3,6 +3,7 @@ const swaggerUi = require("swagger-ui-express");
 const cors = require("cors");
 const morgan = require("morgan");
 const swaggerDocument = require("./swagger.json");
+const { sequelize } = require("./models");
 
 const app = express();
 
@@ -17,15 +18,18 @@ app.use(morgan("dev"));
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get("/", (req, res) => {
-  res.status(200).send(`server is running at port ${port}`);
+  res.status(200).send(`Server is running at port ${port}`);
 });
 
 //User routes
 const userRoutes = require("./routes/user.routes");
 userRoutes(app);
-const user_sqlRoutes = require("./routes/user_sql.routes");
-user_sqlRoutes(app);
 
-app.listen(port, () => {
-  console.log(`Praise the lord! It's running on ${port}`);
+//const user_sqlRoutes = require("./routes/user_sql.routes");
+//user_sqlRoutes(app);
+
+app.listen(port, async () => {
+  console.log(`Praise the lord! It's running on http://localhost:${port}`);
+  await sequelize.authenticate();
+  console.log("Oh mighty database. Give us thy bread!");
 });
