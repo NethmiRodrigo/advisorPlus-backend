@@ -1,4 +1,4 @@
-const { User_Profile } = require("../models");
+const { Post } = require("../models");
 
 exports.create = (req, res) => {
   if (!req.body) {
@@ -7,22 +7,23 @@ exports.create = (req, res) => {
     });
     return;
   }
-  // create new user
-  const user = {
-    user_id: req.body.id,
-    full_name: req.body.name,
+  // create new post
+  const post = {
+    id: req.body.id,
+    user_id: req.body.user_id,
+    body: req.body.body,
     content: req.body.content,
-    dateOfBirth: req.body.dateOfBirth,
-    gender: req.body.gender,
+    uuid: req.body.uuid,
     status: req.body.status,
-    imageURL: req.body.imageURL,
+    audience: req.body.audience,
+    service: req.body.service,
     createdAt: req.body.createdAt,
     updateAt: req.body.updatedAt,
   };
 
-  //save user in the database
+  //save post in the database
 
-  User_Profile.create(user)
+  Post.create(post)
     .then((data) => {
       res.send(data).send({
         message: "SUCCESS",
@@ -34,8 +35,8 @@ exports.create = (req, res) => {
 };
 
 exports.findById = (req, res) => {
-  const uid = req.params.userId;
-  User_Profile.findByPk(uid)
+  const id = req.params.postId;
+  Post.findByPk(id)
     .then((data) => {
       res.send(data);
     })
@@ -45,11 +46,24 @@ exports.findById = (req, res) => {
       });
     });
 };
+exports.findAllByUser = (req, res) => {
+  const user_id = req.query.user_id;
+  var condition = user_id ? { user_id: user_id } : null;
+  Post.findAll({ where: condition })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "error occurred while retrieving Posts.",
+      });
+    });
+};
 
 exports.update = (req, res) => {
-  const id = req.params.userId;
-  User_Profile.update(req.body, {
-    where: { user_id: id },
+  const id = req.params.postId;
+  Post.update(req.body, {
+    where: { id: id },
   })
     .then((n) => {
       if (n == 1)
@@ -70,10 +84,10 @@ exports.update = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-  const id = req.params.userId;
+  const id = req.params.postId;
 
-  User_Profile.destroy({
-    where: { user_id: id },
+  Post.destroy({
+    where: { id: id },
   })
     .then((n) => {
       if (n == 1)

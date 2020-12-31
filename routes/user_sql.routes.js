@@ -5,7 +5,7 @@ module.exports = (app) => {
 
   app.get("/user_sql/:userId", users.findById);
 
-  app.put("/user_sql/:userId", users.updateById);
+  app.put("/user_sql/:userId", users.update);
 
-  app.delete("/user_sql/:userId", users.deleteById);
+  app.delete("/user_sql/:userId", users.delete);
 };
