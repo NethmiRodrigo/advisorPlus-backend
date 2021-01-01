@@ -253,6 +253,111 @@
           }
         }
       }
+    },
+    "/advisor_profile": {
+      "post": {
+        "tags": ["Advisor Profile"],
+        "consumes": "application/json",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "advisor",
+            "schema": {
+              "$ref": "#/definitions/advisor_profile"
+            }
+          }
+        ],
+        "summary": "Create an advisor",
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": "text"
+          },
+          "404": {
+            "description": "ERROR",
+            "content": "text"
+          }
+        }
+      }
+    },
+    "/advisor_profile/{advisorId}": {
+      "get": {
+        "tags": ["Advisor Profile"],
+        "parameters": [
+          {
+            "name": "advisorId",
+            "in": "path",
+            "required": "true",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Get details of an advisor",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/advisor_profile"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Advisor Profile"],
+        "parameters": [
+          {
+            "name": "advisorId",
+            "in": "path",
+            "required": "true",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "user",
+            "schema": {
+              "$ref": "#/definitions/advisor_profile"
+            }
+          }
+        ],
+        "summary": "Update advisor by Id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/advisor_profile"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Advisor Profile"],
+        "parameters": [
+          {
+            "name": "advisorId",
+            "in": "path",
+            "required": "true",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Delete advisor by Id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/advisor_profile"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -343,6 +448,48 @@
         "service": {
           "type": "integer",
           "format": "int64"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    },
+    "advisor_profile": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "content",
+        "dateOfBirth",
+        "gender",
+        "status",
+        "imageURL",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["blacklisted", "active", "suspended"]
+        },
+        "rating": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "imageURL": {
+          "type": "string",
+          "enum": ["male", "female"]
         },
         "createdAt": {
           "type": "string"
