@@ -25,8 +25,11 @@ app.get("/", (req, res) => {
 const userRoutes = require("./routes/user.routes");
 userRoutes(app);
 
-//const user_sqlRoutes = require("./routes/user_sql.routes");
-//user_sqlRoutes(app);
+const user_sqlRoutes = require("./routes/user_sql.routes");
+user_sqlRoutes(app);
+
+const postRoutes = require("./routes/post.routes");
+postRoutes(app);
 
 app.listen(port, async () => {
   console.log(`Praise the lord! It's running on http://localhost:${port}`);
