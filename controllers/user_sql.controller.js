@@ -1,23 +1,21 @@
+const { response } = require("express");
 const { User_Profile } = require("../models");
 
 exports.create = (req, res) => {
   if (!req.body) {
-    res.status(400).send({
+    return res.status(400).send({
       message: "Content cannot be empty!",
     });
-    return;
   }
   // create new user
   const user = {
-    user_id: req.body.id,
+    user_id: req.user.uid,
     full_name: req.body.name,
     content: req.body.content,
     dateOfBirth: req.body.dateOfBirth,
     gender: req.body.gender,
     status: req.body.status,
     imageURL: req.body.imageURL,
-    createdAt: req.body.createdAt,
-    updateAt: req.body.updatedAt,
   };
 
   //save user in the database

@@ -1,11 +1,13 @@
+const auth = require("../middleware/auth");
+
 module.exports = (app) => {
   const users = require("../controllers/user_sql.controller.js");
 
-  app.post("/user_sql", users.create);
+  app.post("/user_sql", auth(), users.create);
 
-  app.get("/user_sql/:userId", users.findById);
+  app.get("/user_sql/:userId", auth(), users.findById);
 
-  app.put("/user_sql/:userId", users.update);
+  app.put("/user_sql/:userId", auth("user"), users.update); //dont ask for params userID here user req.user.uid in controller.
 
-  app.delete("/user_sql/:userId", users.delete);
+  app.delete("/user_sql/:userId", auth("user"), users.delete); //dont ask for params userID here user req.user.uid in controller.
 };
