@@ -1,4 +1,4 @@
-const { Post } = require("../models");
+const { Comment } = require("../models");
 
 exports.create = (req, res) => {
   if (!req.body) {
@@ -8,22 +8,20 @@ exports.create = (req, res) => {
     return;
   }
   // create new post
-  const post = {
+  const comment = {
     id: req.body.id,
+    post_id: req.body.post_id,
     user_id: req.body.user_id,
     body: req.body.body,
-    content: req.body.content,
     uuid: req.body.uuid,
-    status: req.body.status,
-    audience: req.body.audience,
-    service: req.body.service,
+    rating: req.body.status,
     createdAt: req.body.createdAt,
     updateAt: req.body.updatedAt,
   };
 
   //save post in the database
 
-  Post.create(post)
+  Comment.create(comment)
     .then((data) => {
       res.send(data).send({
         message: "SUCCESS",
@@ -35,7 +33,7 @@ exports.create = (req, res) => {
 };
 
 exports.findById = (req, res) => {
-  const id = req.params.postId;
+  const id = req.params.commentId;
   Post.findByPk(id)
     .then((data) => {
       res.send(data);
@@ -59,7 +57,6 @@ exports.findAllByUser = (req, res) => {
       });
     });
 };
-
 exports.findAllByPost = (req, res) => {
   const post_id = req.params.post_id;
   var condition = post_id ? { post_id: post_id } : null;
@@ -73,7 +70,6 @@ exports.findAllByPost = (req, res) => {
       });
     });
 };
-
 exports.update = (req, res) => {
   const id = req.params.postId;
   Post.update(req.body, {

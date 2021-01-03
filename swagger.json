@@ -45,7 +45,7 @@
         "tags": ["Posts"],
         "parameters": [
           {
-            "name": "postId",
+            "name": "user_id",
             "in": "query",
             "required": "true",
             "schema": {
@@ -54,7 +54,7 @@
             }
           }
         ],
-        "summary": "Get all posts",
+        "summary": "Get all posts of a user",
         "responses": {
           "200": {
             "description": "OK",
@@ -80,7 +80,7 @@
             }
           }
         ],
-        "summary": "Get all posts of a user",
+        "summary": "Get a post",
         "responses": {
           "200": {
             "description": "OK",
@@ -358,6 +358,136 @@
           }
         }
       }
+    },
+    "/comment": {
+      "post": {
+        "tags": ["Comments"],
+        "consumes": "application/json",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "comment",
+            "schema": {
+              "$ref": "#/definitions/comment"
+            }
+          }
+        ],
+        "summary": "Create a comment",
+
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": "text"
+          },
+          "404": {
+            "description": "ERROR",
+            "content": "text"
+          }
+        }
+      }
+    },
+    "/comment/{commentId}": {
+      "get": {
+        "tags": ["Comments"],
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": "true",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Get details of a comment",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/comment"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Comments"],
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": "true",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "body",
+            "name": "user",
+            "schema": {
+              "$ref": "#/definitions/comment"
+            }
+          }
+        ],
+        "summary": "Update comment by Id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/comment"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Comments"],
+        "parameters": [
+          {
+            "name": "commentId",
+            "in": "path",
+            "required": "true",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Delete comment by Id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/comment"
+            }
+          }
+        }
+      }
+    },
+    "/comment/{postId}": {
+      "get": {
+        "tags": ["Comments"],
+        "parameters": [
+          {
+            "name": "postId",
+            "in": "path",
+            "required": "true",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Get comments of a post",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": "application/json",
+            "schema": {
+              "$ref": "#/definitions/comment"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -491,6 +621,50 @@
           "type": "string",
           "enum": ["male", "female"]
         },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      }
+    },
+    "comment": {
+      "type": "object",
+      "required": [
+        "id",
+        "post_id",
+        "user_id",
+        "body",
+        "uuid",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "uniqueItems": true
+        },
+        "post_id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "body": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "integer",
+          "format": "int64"
+        },
+
         "createdAt": {
           "type": "string"
         },
