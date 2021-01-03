@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       content: {
         type: DataTypes.STRING,
-        allowNull: false,
       },
       dateOfBirth: {
         type: DataTypes.DATE,
