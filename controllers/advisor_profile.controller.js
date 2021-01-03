@@ -2,20 +2,17 @@ const { Advisor_Profile } = require("../models");
 
 exports.create = (req, res) => {
   if (!req.body) {
-    res.status(400).send({
+    return res.status(400).send({
       message: "Content cannot be empty!",
     });
-    return;
   }
   // create new user
   const advisor = {
-    user_id: req.body.id,
+    user_id: req.user.uid,
     full_name: req.body.name,
     status: req.body.status,
     rating: req.body.rating,
     imageURL: req.body.imageURL,
-    createdAt: req.body.createdAt,
-    updateAt: req.body.updatedAt,
   };
 
   //save user in the database
