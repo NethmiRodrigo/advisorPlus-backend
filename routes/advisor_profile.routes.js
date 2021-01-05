@@ -10,4 +10,6 @@ module.exports = (app) => {
   app.put("/advisor_profile/:advisorId", auth("advisor"), advisor.update);
 
   app.delete("/advisor_profile/:advisorId", auth("advisor"), advisor.delete);
+
+  app.post("/advisor-image", auth("advisor"), advisor.uploadProfileImage);
 };
