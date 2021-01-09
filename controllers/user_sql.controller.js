@@ -48,7 +48,7 @@ exports.findById = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const id = req.params.userId;
+  const id = req.user.uid;
   User_Profile.update(req.body, {
     where: { user_id: id },
   })

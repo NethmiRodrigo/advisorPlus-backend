@@ -11,9 +11,8 @@ exports.create = (req, res) => {
   const comment = {
     id: req.body.id,
     post_id: req.body.post_id,
-    user_id: req.body.user_id,
+    user_id: req.user.uid,
     body: req.body.body,
-    uuid: req.body.uuid,
     rating: req.body.status,
   };
 

@@ -45,7 +45,7 @@ exports.findById = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const id = req.params.advisorId;
+  const id = req.user.uid;
   Advisor_Profile.update(req.body, {
     where: { user_id: id },
   })

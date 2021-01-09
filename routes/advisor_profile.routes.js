@@ -7,7 +7,7 @@ module.exports = (app) => {
 
   app.get("/advisor_profile/:advisorId", auth(), advisor.findById);
 
-  app.put("/advisor_profile/:advisorId", auth("advisor"), advisor.update);
+  app.put("/advisor_profile", auth("advisor"), advisor.update);
 
   app.delete("/advisor_profile/:advisorId", auth("advisor"), advisor.delete);
 
