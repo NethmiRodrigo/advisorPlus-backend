@@ -16,7 +16,6 @@ exports.create = (req, res) => {
     full_name: req.body.name,
     status: req.body.status,
     rating: req.body.rating,
-    imageURL: req.body.imageURL,
   };
 
   //save user in the database

@@ -15,8 +15,6 @@ exports.create = (req, res) => {
     body: req.body.body,
     uuid: req.body.uuid,
     rating: req.body.status,
-    createdAt: req.body.createdAt,
-    updateAt: req.body.updatedAt,
   };
 
   //save post in the database

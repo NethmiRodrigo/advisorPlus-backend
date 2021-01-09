@@ -19,7 +19,6 @@ exports.create = (req, res) => {
     dateOfBirth: req.body.dateOfBirth,
     gender: req.body.gender,
     status: req.body.status,
-    imageURL: req.body.imageURL,
   };
 
   //save user in the database
