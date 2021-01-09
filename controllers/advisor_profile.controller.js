@@ -1,8 +1,9 @@
-const { Advisor_Profile } = require("../models");
+const { Advisor_Profile, User_Role } = require("../models");
 const firebaseConfig = require("../config/fb_config");
 const { multerUpload } = require("../middleware/multer");
 const fs = require("fs");
 const { admin } = require("../util/admin");
+const { response } = require("express");
 
 exports.create = (req, res) => {
   if (!req.body) {
@@ -14,19 +15,21 @@ exports.create = (req, res) => {
   const advisor = {
     user_id: req.user.uid,
     full_name: req.body.name,
-    status: req.body.status,
-    rating: req.body.rating,
   };
 
-  //save user in the database
+  if (!advisor.full_name)
+    return res.status(400).json({ message: "Invalid input" });
 
-  Advisor_Profile.create(advisor)
+  //save user in the database
+  User_Role.create({ user_id: advisor.user_id, role: "advisor" })
+    .then(() => {
+      return Advisor_Profile.create(advisor);
+    })
     .then((data) => {
-      res.send(data).send({
-        message: "SUCCESS",
-      });
+      return res.status(201).send(data);
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).send({ message: err.message });
     });
 };
@@ -69,6 +72,8 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
   const id = req.params.advisorId;
+
+  //TODO : DELETE respective row from user_role table
 
   Advisor_Profile.destroy({
     where: { user_id: id },
