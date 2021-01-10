@@ -1,5 +1,6 @@
 const firebase = require("firebase");
 const firebaseConfig = require("../config/fb_config");
+const { User_Role } = require("../models");
 
 //Utilities
 const { isEmail } = require("../util/validations");
@@ -71,7 +72,19 @@ exports.login = async (request, response) => {
     const userID = data.user.uid;
     const token = await data.user.getIdToken();
 
-    return response.status(200).json({ userID, token });
+    const user_role = await User_Role.findAll({
+      where: {
+        user_id: userID,
+      },
+    });
+
+    let roles = [];
+
+    user_role.forEach((element) => {
+      roles.push(element.role);
+    });
+
+    return response.status(200).json({ userID, token, roles });
   } catch (error) {
     return response.status(500).json({ error });
   }

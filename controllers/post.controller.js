@@ -10,11 +10,9 @@ exports.create = (req, res) => {
   // create new post
   const post = {
     id: req.body.id,
-    user_id: req.body.user_id,
+    user_id: req.user.uid,
     body: req.body.body,
     content: req.body.content,
-    uuid: req.body.uuid,
-    status: req.body.status,
     audience: req.body.audience,
     service: req.body.service,
   };

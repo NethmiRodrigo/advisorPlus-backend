@@ -13,7 +13,7 @@ exports.create = (req, res) => {
     qualification: req.body.qualification,
     description: req.body.description,
     date: req.body.date,
-    user_id: req.body.user_id,
+    user_id: req.user.uid,
   };
 
   Qualification.create(qualification)

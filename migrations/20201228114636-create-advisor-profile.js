@@ -4,8 +4,8 @@ module.exports = {
     await queryInterface.createTable("advisor_profile", {
       user_id: {
         type: DataTypes.STRING,
-        allowNull: false,
         primaryKey: true,
+        references: { model: "user_role", key: "user_id" },
       },
       full_name: {
         type: DataTypes.STRING,

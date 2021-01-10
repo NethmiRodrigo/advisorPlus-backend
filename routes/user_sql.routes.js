@@ -7,7 +7,7 @@ module.exports = (app) => {
 
   app.get("/user_sql/:userId", auth(), users.findById);
 
-  app.put("/user_sql/:userId", auth("user"), users.update); //dont ask for params userID here user req.user.uid in controller.
+  app.put("/user_sql", auth("user"), users.update); //dont ask for params userID here user req.user.uid in controller.
 
   app.delete("/user_sql/:userId", auth("user"), users.delete); //dont ask for params userID here use req.user.uid in controller.
 

@@ -1,6 +1,6 @@
 const { response } = require("express");
 const { admin } = require("../util/admin");
-const { User_Profile } = require("../models");
+const { User_Profile, User_Role } = require("../models");
 const firebaseConfig = require("../config/fb_config");
 const { multerUpload } = require("../middleware/multer");
 const fs = require("fs");
@@ -18,18 +18,21 @@ exports.create = (req, res) => {
     content: req.body.content,
     dateOfBirth: req.body.dateOfBirth,
     gender: req.body.gender,
-    status: req.body.status,
   };
 
   //save user in the database
+  if (!user.full_name)
+    return res.status(400).json({ message: "Invalid input" });
 
-  User_Profile.create(user)
+  User_Role.create({ user_id: user.user_id, role: "user" })
+    .then(() => {
+      return User_Profile.create(user);
+    })
     .then((data) => {
-      res.send(data).send({
-        message: "SUCCESS",
-      });
+      return res.status(201).send(data);
     })
     .catch((err) => {
+      console.log(error);
       res.status(500).send({ message: err.message });
     });
 };
@@ -48,7 +51,7 @@ exports.findById = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const id = req.params.userId;
+  const id = req.user.uid;
   User_Profile.update(req.body, {
     where: { user_id: id },
   })
@@ -72,6 +75,8 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
   const id = req.params.userId;
+
+  //TODO : DELETE respective row from user_role table
 
   User_Profile.destroy({
     where: { user_id: id },
