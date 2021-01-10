@@ -34,6 +34,12 @@ postRoutes(app);
 const advisorRoutes = require("./routes/advisor_profile.routes");
 advisorRoutes(app);
 
+const serviceRoutes = require("./routes/service.routes");
+serviceRoutes(app);
+
+const advisor_serviceRoutes = require("./routes/advisor_service.routes");
+advisor_serviceRoutes(app);
+
 app.listen(port, async () => {
   console.log(`Praise the lord! It's running on http://localhost:${port}`);
   await sequelize.authenticate();

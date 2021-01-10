@@ -9,7 +9,6 @@ exports.create = (req, res) => {
   }
   // create new post
   const comment = {
-    id: req.body.id,
     post_id: req.body.post_id,
     user_id: req.user.uid,
     body: req.body.body,
@@ -20,9 +19,7 @@ exports.create = (req, res) => {
 
   Comment.create(comment)
     .then((data) => {
-      res.send(data).send({
-        message: "SUCCESS",
-      });
+      return res.send(data);
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
