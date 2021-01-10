@@ -3,6 +3,9 @@ module.exports = (app) => {
 
   app.post("/post", post.create);
 
+  //get all posts
+  app.get("/post", post.findAll);
+
   app.get("/post/:postId", post.findById);
 
   app.put("/post/:postId", post.update);
