@@ -9,7 +9,6 @@ exports.create = (req, res) => {
   }
 
   const qualification = {
-    id: req.body.id,
     qualification: req.body.qualification,
     description: req.body.description,
     date: req.body.date,
@@ -18,9 +17,7 @@ exports.create = (req, res) => {
 
   Qualification.create(qualification)
     .then((data) => {
-      res.send(data).send({
-        message: "SUCCESS",
-      });
+      res.send(data);
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });

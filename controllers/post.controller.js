@@ -9,7 +9,6 @@ exports.create = (req, res) => {
   }
   // create new post
   const post = {
-    id: req.body.id,
     user_id: req.user.uid,
     body: req.body.body,
     content: req.body.content,
@@ -21,9 +20,7 @@ exports.create = (req, res) => {
 
   Post.create(post)
     .then((data) => {
-      res.send(data).send({
-        message: "SUCCESS",
-      });
+      return res.send(data);
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });

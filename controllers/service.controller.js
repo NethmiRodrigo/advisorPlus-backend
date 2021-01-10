@@ -9,16 +9,13 @@ exports.create = (req, res) => {
   }
 
   const service = {
-    id: req.body.id,
     name: req.body.name,
     description: req.body.description,
   };
 
   Service.create(service)
     .then((data) => {
-      res.send(data).send({
-        message: "SUCCESS",
-      });
+      return res.send(data);
     })
     .catch((err) => {
       res.status(500).send({ message: err.message });
