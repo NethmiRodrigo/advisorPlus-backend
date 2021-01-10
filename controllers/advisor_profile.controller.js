@@ -33,7 +33,17 @@ exports.create = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
-
+exports.findAll = (req, res) => {
+  Advisor_Profile.findAll()
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: err.message || "ERROR",
+      });
+    });
+};
 exports.findById = (req, res) => {
   const id = req.params.advisorId;
   Advisor_Profile.findByPk(id)

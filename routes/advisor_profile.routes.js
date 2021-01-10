@@ -5,6 +5,8 @@ module.exports = (app) => {
 
   app.post("/advisor_profile", auth(), advisor.create);
 
+  app.get("/advisor_profile", auth(), advisor.findAll);
+
   app.get("/advisor_profile/:advisorId", auth(), advisor.findById);
 
   app.put("/advisor_profile", auth("advisor"), advisor.update);
