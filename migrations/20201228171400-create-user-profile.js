@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, DataTypes) => {
-    await queryInterface.createTable("User_Profile", {
+    await queryInterface.createTable("user_profile", {
       user_id: {
         type: DataTypes.STRING,
         primaryKey: true,

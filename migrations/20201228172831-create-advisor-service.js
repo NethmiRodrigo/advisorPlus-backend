@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, DataTypes) => {
-    await queryInterface.createTable("advisor_Service", {
+    await queryInterface.createTable("advisor_service", {
       id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
