@@ -46,7 +46,7 @@ exports.findById = async (req, res) => {
   const id = req.params.postId;
   try{
   let PostbyID = Post.findByPk(id)
-    PostbyID.full_name = await User_Profile.findByPk(PostbyID.user_id);
+    PostbyID.full_name =  User_Profile.findByPk(PostbyID.user_id);
     return res.status(200).json({PostbyID});
   }
   catch(error){
@@ -57,7 +57,7 @@ exports.findById = async (req, res) => {
 exports.findAllByUser = async (req, res) => {
   const user_id = req.params.userId;
   var condition = user_id ? { user_id: user_id } : null;
-  let user =  await User_Profile.findByPk(user_id)
+  let user =   User_Profile.findByPk(user_id)
 
   try{
     let listPosts = Post.findAll({ where: condition })
@@ -77,7 +77,7 @@ exports.findAllByPost = async (req, res) => {
   try{
     let listPosts = Post.findAll({ where: condition })
     listPosts.forEach((item)=>{
-      let user = await User_Profile.findByPk(item.user_id);
+      let user =  User_Profile.findByPk(item.user_id);
       item.full_name = user.full_name;
     })
     return res.status(200).json({listPosts});
