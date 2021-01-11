@@ -9,7 +9,7 @@ const app = express();
 
 const port = "5000" || process.env.PORT;
 
-app.use(cors());
+
 app.use(express.json());
 
 /* Log HTTP requests */
@@ -39,6 +39,14 @@ serviceRoutes(app);
 
 const advisor_serviceRoutes = require("./routes/advisor_service.routes");
 advisor_serviceRoutes(app);
+
+const comment_Routes = = require("./routes/comment.routes");
+comment_Routes(app);
+
+
+const qual_Routes = = require("./routes/qualification.routes");
+qual_Routes(app);
+
 
 app.listen(port, async () => {
   console.log(`Praise the lord! It's running on http://localhost:${port}`);
