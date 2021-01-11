@@ -34,7 +34,15 @@ exports.findById = (req, res) => {
       });
     });
 };
-
+exports.getAll = (req, res) => {
+  Service.findAll()
+    .then((data) => {
+      return res.status(200).json({ data });
+    })
+    .catch((err) => {
+      res.status(500).json({ error });
+    });
+};
 exports.update = (req, res) => {
   const id = req.params.serviceId;
   Service.update(req.body, {

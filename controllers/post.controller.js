@@ -34,11 +34,11 @@ exports.findAll = (req, res) => {
     posts.forEach((item)=>{
       item.full_name = User_Profile.findByPk(item.user_id).full_name
     })
-    return response.status(200).json({posts});
+    return res.status(200).json({posts});
   }
 
   catch(error){
-    response.status(500).json({error});
+    res.status(500).json({error});
   }
 };
 exports.findById = (req, res) => {
@@ -46,10 +46,10 @@ exports.findById = (req, res) => {
   try{
   let PostbyID = Post.findByPk(id)
     PostbyID.full_name = await User_Profile.findByPk(PostbyID.user_id);
-    return response.status(200).json({PostbyID});
+    return res.status(200).json({PostbyID});
   }
   catch(error){
-    response.status(500).json({error})
+    res.status(500).json({error})
   }
   
 };
@@ -63,10 +63,10 @@ exports.findAllByUser = (req, res) => {
     listPosts.forEach((item) => {
       item.full_name = user.full_name;
     })
-    return response.status(200).json({listPosts});
+    return res.status(200).json({listPosts});
   }
   catch(error){
-    response.status(500).json({error})
+    res.status(500).json({error})
   }
 };
 
@@ -79,10 +79,10 @@ exports.findAllByPost = (req, res) => {
       let user = await User_Profile.findByPk(item.user_id);
       item.full_name = user.full_name;
     })
-    return response.status(200).json({listPosts});
+    return res.status(200).json({listPosts});
 }
   catch(error){
-    response.status(500).json({error})
+    res.status(500).json({error})
   }
 };
 
