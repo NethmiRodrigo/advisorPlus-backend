@@ -27,7 +27,7 @@ exports.create = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
-exports.findAll = (req, res) => {
+exports.findAll = async (req, res) => {
 
   try{
     let posts = await Post.findAll();
@@ -41,7 +41,7 @@ exports.findAll = (req, res) => {
     res.status(500).json({error});
   }
 };
-exports.findById = (req, res) => {
+exports.findById = async (req, res) => {
   const id = req.params.postId;
   try{
   let PostbyID = Post.findByPk(id)
@@ -53,7 +53,7 @@ exports.findById = (req, res) => {
   }
   
 };
-exports.findAllByUser = (req, res) => {
+exports.findAllByUser = async (req, res) => {
   const user_id = req.params.userId;
   var condition = user_id ? { user_id: user_id } : null;
   let user =  await User_Profile.findByPk(user_id)
@@ -70,7 +70,7 @@ exports.findAllByUser = (req, res) => {
   }
 };
 
-exports.findAllByPost = (req, res) => {
+exports.findAllByPost = async (req, res) => {
   const post_id = req.params.post_id;
   var condition = post_id ? { post_id: post_id } : null;
   try{
@@ -86,7 +86,7 @@ exports.findAllByPost = (req, res) => {
   }
 };
 
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
   const id = req.params.postId;
   Post.update(req.body, {
     where: { id: id },
@@ -109,7 +109,7 @@ exports.update = (req, res) => {
     });
 };
 
-exports.delete = (req, res) => {
+exports.delete = async (req, res) => {
   const id = req.params.postId;
 
   Post.destroy({
