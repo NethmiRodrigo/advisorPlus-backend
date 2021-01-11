@@ -12,6 +12,7 @@ exports.create = (req, res) => {
   const post = {
     user_id: req.user.uid,
     body: req.body.body,
+    title: req.body.title,
     content: req.body.content,
     audience: req.body.audience,
     service: req.body.service,

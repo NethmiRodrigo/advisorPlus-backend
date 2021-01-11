@@ -13,6 +13,10 @@ module.exports = {
         allowNull: false,
         references: { model: "user_profile", key: "user_id" },
       },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       body: {
         type: DataTypes.STRING,
         allowNull: false,
